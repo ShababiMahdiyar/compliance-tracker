@@ -1,0 +1,171 @@
+<div class="auth">
+  <!-- ─── Left: Brand Panel ─── -->
+  <aside class="panel">
+    <div class="panel__bg">
+      <div class="panel__texture"></div>
+      <div class="panel__glow panel__glow--1"></div>
+      <div class="panel__glow panel__glow--2"></div>
+      <div class="panel__grid"></div>
+    </div>
+
+    <div class="panel__content">
+      <div class="panel__logo">
+        <div class="panel__logo-mark">
+          <mat-icon>shield</mat-icon>
+        </div>
+        <span class="panel__logo-text">ComplianceTracker</span>
+      </div>
+
+      <div class="panel__hero">
+        <p class="panel__kicker">Enterprise Compliance Platform</p>
+        <h1 class="panel__headline">
+          Compliance<br />
+          <em>starts&nbsp;here.</em>
+        </h1>
+        <div class="panel__rule"></div>
+        <p class="panel__desc">
+          Enterprise training management with real-time compliance intelligence.
+        </p>
+      </div>
+
+      <div class="panel__trust">
+        <div class="panel__trust-item">
+          <div class="panel__trust-icon">
+            <mat-icon>lock</mat-icon>
+          </div>
+          <div class="panel__trust-text">
+            <span class="panel__trust-value">256-bit</span>
+            <span class="panel__trust-label">Encryption</span>
+          </div>
+        </div>
+        <div class="panel__trust-sep"></div>
+        <div class="panel__trust-item">
+          <div class="panel__trust-icon">
+            <mat-icon>verified_user</mat-icon>
+          </div>
+          <div class="panel__trust-text">
+            <span class="panel__trust-value">SOC 2</span>
+            <span class="panel__trust-label">Certified</span>
+          </div>
+        </div>
+        <div class="panel__trust-sep"></div>
+        <div class="panel__trust-item">
+          <div class="panel__trust-icon">
+            <mat-icon>speed</mat-icon>
+          </div>
+          <div class="panel__trust-text">
+            <span class="panel__trust-value">99.9%</span>
+            <span class="panel__trust-label">Uptime</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="panel__footer">
+      &copy; 2025 ComplianceTracker &middot; Enterprise Edition
+    </footer>
+  </aside>
+
+  <!-- ─── Right: Sign In ─── -->
+  <main class="gate">
+    <div class="gate__inner">
+      <!-- Mobile logo -->
+      <div class="gate__mobile-logo">
+        <div class="panel__logo-mark panel__logo-mark--sm">
+          <mat-icon>shield</mat-icon>
+        </div>
+        <span class="gate__mobile-name">ComplianceTracker</span>
+      </div>
+
+      <div class="gate__card">
+        <header class="gate__header">
+          <span class="gate__badge">
+            <mat-icon>lock</mat-icon>
+            Secure login
+          </span>
+          <h2 class="gate__title">Welcome back</h2>
+          <p class="gate__subtitle">Sign in to your account to continue</p>
+        </header>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="gate__form">
+          @if (errorMessage()) {
+            <div class="gate__error" role="alert">
+              <mat-icon>error_outline</mat-icon>
+              <span>{{ errorMessage() }}</span>
+            </div>
+          }
+
+          <div class="gate__fields">
+            <mat-form-field appearance="outline" class="gate__field">
+              <mat-label>Email address</mat-label>
+              <input
+                matInput
+                formControlName="email"
+                type="email"
+                placeholder="you&#64;company.com"
+                autocomplete="email"
+              />
+              <mat-icon matSuffix>mail_outline</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="gate__field">
+              <mat-label>Password</mat-label>
+              <input
+                matInput
+                formControlName="password"
+                [type]="hidePassword() ? 'password' : 'text'"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+              />
+              <button
+                type="button"
+                matIconButton
+                matSuffix
+                (click)="togglePasswordVisibility($event)"
+                aria-label="Toggle password visibility"
+              >
+                <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+
+          <button
+            mat-flat-button
+            type="submit"
+            [disabled]="loginForm.invalid || loading()"
+            class="gate__submit"
+          >
+            @if (loading()) {
+              <mat-spinner diameter="20"></mat-spinner>
+            } @else {
+              <ng-container>
+                <span>Sign In</span>
+                <mat-icon iconPositionEnd class="gate__submit-arrow">east</mat-icon>
+              </ng-container>
+            }
+          </button>
+        </form>
+
+        <!-- Demo credentials -->
+        <div class="gate__demo">
+          <div class="gate__demo-label">
+            <mat-icon>science</mat-icon>
+            <span>Demo Credentials</span>
+          </div>
+          <div class="gate__demo-grid">
+            <div class="gate__demo-row">
+              <span class="gate__demo-role gate__demo-role--admin">Admin</span>
+              <code class="gate__demo-cred">admin&#64;company.com</code>
+              <code class="gate__demo-cred">admin123</code>
+            </div>
+            <div class="gate__demo-row">
+              <span class="gate__demo-role gate__demo-role--user">Employee</span>
+              <code class="gate__demo-cred">john&#64;company.com</code>
+              <code class="gate__demo-cred">employee123</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
