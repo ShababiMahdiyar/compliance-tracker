@@ -1,0 +1,63 @@
+<mat-sidenav-container class="shell">
+  <mat-sidenav
+    #sidenav
+    [mode]="sidenavMode()"
+    [opened]="!isMobile() || sidenavOpened()"
+    class="sidebar"
+  >
+    <!-- Brand -->
+    <div class="sidebar__brand">
+      <div class="sidebar__logo">
+        <mat-icon>shield</mat-icon>
+      </div>
+      <span class="sidebar__title">ComplianceTracker</span>
+    </div>
+
+    <!-- Section label -->
+    <div class="sidebar__section-label">Navigation</div>
+
+    <!-- Navigation -->
+    <mat-nav-list class="sidebar__nav">
+      @for (item of navItems(); track item.route) {
+        <a mat-list-item [routerLink]="item.route" routerLinkActive="sidebar__link--active" (click)="isMobile() && sidenav.close()">
+          <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+          <span matListItemTitle>{{ item.label }}</span>
+        </a>
+      }
+    </mat-nav-list>
+
+    <!-- Version -->
+    <div class="sidebar__version">v1.0.0</div>
+
+    <!-- User section -->
+    <div class="sidebar__footer">
+      <div class="sidebar__user">
+        <div class="sidebar__avatar">{{ getUserInitials() }}</div>
+        <div class="sidebar__user-info">
+          <span class="sidebar__user-name">{{ user()?.firstName }} {{ user()?.lastName }}</span>
+          <span class="sidebar__user-role">{{ isAdmin() ? 'Administrator' : 'Employee' }}</span>
+        </div>
+      </div>
+      <button mat-icon-button (click)="logout()" matTooltip="Sign out" class="sidebar__logout">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="main">
+    <!-- Top bar -->
+    <header class="topbar">
+      @if (isMobile()) {
+        <button mat-icon-button (click)="sidenav.toggle()" class="topbar__menu">
+          <mat-icon>menu</mat-icon>
+        </button>
+      }
+      <span class="topbar__spacer"></span>
+      <span class="topbar__badge">{{ isAdmin() ? 'Admin' : 'Employee' }}</span>
+    </header>
+
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
