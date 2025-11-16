@@ -1,0 +1,263 @@
+// ─── Shell ────────────────────────────────────────────
+.shell {
+  height: 100vh;
+  height: 100dvh;
+}
+
+// ─── Sidebar ──────────────────────────────────────────
+.sidebar {
+  width: 256px;
+  display: flex;
+  flex-direction: column;
+  background: var(--ct-navy-950) !important;
+  border-right: none !important;
+
+  // Subtle noise texture overlay
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 16px 16px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  // Ensure content sits above texture
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 20px 16px;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--ct-amber-400), var(--ct-amber-500));
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      color: var(--ct-navy-950);
+    }
+  }
+
+  &__title {
+    font-family: var(--ct-font-sans);
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.3px;
+  }
+
+  &__section-label {
+    padding: 0 20px 8px;
+    font-family: var(--ct-font-sans);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ct-navy-600);
+  }
+
+  // Nav list overrides
+  &__nav {
+    flex: 1;
+    padding: 0 8px !important;
+
+    // Reset Material list item styles for dark bg
+    ::ng-deep .mat-mdc-list-item {
+      border-radius: var(--ct-radius-md) !important;
+      margin-bottom: 2px;
+      color: var(--ct-navy-400) !important;
+      transition: background 0.15s ease, color 0.15s ease;
+
+      .mat-mdc-list-item-unscoped-content,
+      .mdc-list-item__primary-text {
+        color: var(--ct-navy-400) !important;
+        font-family: var(--ct-font-sans) !important;
+        font-size: 13px !important;
+        font-weight: 500 !important;
+      }
+
+      mat-icon {
+        color: var(--ct-navy-500) !important;
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+      }
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.05) !important;
+        color: var(--ct-navy-200) !important;
+
+        .mdc-list-item__primary-text {
+          color: var(--ct-navy-200) !important;
+        }
+
+        mat-icon {
+          color: var(--ct-navy-300) !important;
+        }
+      }
+    }
+
+    // Active link with left-edge glow
+    ::ng-deep .sidebar__link--active {
+      background: rgba(251, 191, 36, 0.1) !important;
+      position: relative;
+
+      // Left glow bar
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 6px;
+        bottom: 6px;
+        width: 3px;
+        border-radius: 0 3px 3px 0;
+        background: var(--ct-amber-400);
+        box-shadow: 0 0 8px rgba(251, 191, 36, 0.5);
+      }
+
+      .mdc-list-item__primary-text {
+        color: var(--ct-amber-400) !important;
+        font-weight: 600 !important;
+      }
+
+      mat-icon {
+        color: var(--ct-amber-400) !important;
+      }
+    }
+  }
+
+  &__version {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 0;
+    font-family: var(--ct-font-mono);
+    font-size: 10px;
+    color: var(--ct-navy-700);
+    letter-spacing: 0.5px;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  &__avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: var(--ct-navy-700);
+    color: var(--ct-navy-300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--ct-font-sans);
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  &__user-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  &__user-name {
+    font-family: var(--ct-font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ct-navy-200);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__user-role {
+    font-family: var(--ct-font-sans);
+    font-size: 11px;
+    color: var(--ct-navy-500);
+  }
+
+  &__logout {
+    color: var(--ct-navy-500) !important;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: var(--ct-red-400) !important;
+    }
+  }
+}
+
+// ─── Main Content ─────────────────────────────────────
+.main {
+  background: var(--ct-background);
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  height: 52px;
+  padding: 0 24px;
+  background: color-mix(in srgb, var(--ct-surface) 85%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ct-border-subtle);
+
+  &__menu {
+    margin-right: 8px;
+  }
+
+  &__spacer {
+    flex: 1;
+  }
+
+  &__badge {
+    font-family: var(--ct-font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: var(--ct-navy-100);
+    color: var(--ct-navy-600);
+  }
+}
+
+.content {
+  padding: 28px;
+  max-width: 1280px;
+
+  @media (max-width: 600px) {
+    padding: 16px;
+  }
+}
