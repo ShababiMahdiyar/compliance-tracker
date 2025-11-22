@@ -1,0 +1,113 @@
+:host {
+  display: block;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 22px;
+  background: var(--ct-surface);
+  border: 1px solid var(--ct-border-subtle);
+  border-radius: var(--ct-radius-lg);
+  box-shadow: var(--ct-shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+
+  // Subtle left accent bar
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    bottom: 12px;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: var(--accent-color, var(--ct-navy-400));
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--ct-shadow-md);
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  &__icon-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--ct-radius-md);
+    background: color-mix(in srgb, var(--accent-color, var(--ct-navy-500)) 10%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    mat-icon {
+      color: var(--accent-color, var(--ct-navy-500));
+      font-size: 22px;
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  &__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  &__value {
+    font-family: var(--ct-font-mono);
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1.15;
+    color: var(--ct-text-primary);
+    letter-spacing: -0.5px;
+  }
+
+  &__label {
+    font-family: var(--ct-font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ct-text-muted);
+    margin-top: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  &__trend {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-family: var(--ct-font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: var(--ct-radius-sm);
+    color: var(--ct-text-muted);
+    background: var(--ct-navy-100);
+
+    mat-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+    }
+
+    &--up {
+      color: var(--ct-emerald-600);
+      background: color-mix(in srgb, var(--ct-emerald-500) 8%, transparent);
+    }
+
+    &--down {
+      color: var(--ct-red-500);
+      background: color-mix(in srgb, var(--ct-red-500) 8%, transparent);
+    }
+  }
+}
