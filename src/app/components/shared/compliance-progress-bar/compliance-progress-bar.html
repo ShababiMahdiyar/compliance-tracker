@@ -1,0 +1,18 @@
+@if (label()) {
+  <div class="progress-header">
+    <span class="progress-label">{{ label() }}</span>
+    @if (showPercentage()) {
+      <span class="progress-pct" [style.color]="barColor()">{{ value() }}%</span>
+    }
+  </div>
+}
+<div class="progress-track" [style.height.px]="height()">
+  <div
+    class="progress-fill"
+    [style.width.%]="barWidth()"
+    [style.background]="barColor()"
+  ></div>
+</div>
+@if (!label() && showPercentage()) {
+  <span class="progress-pct-inline" [style.color]="barColor()">{{ value() }}%</span>
+}
