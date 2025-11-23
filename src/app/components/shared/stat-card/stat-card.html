@@ -1,0 +1,15 @@
+<div class="stat-card" [style.--accent-color]="color()">
+  <div class="stat-card__icon-wrap">
+    <mat-icon>{{ icon() }}</mat-icon>
+  </div>
+  <div class="stat-card__body">
+    <span class="stat-card__value">{{ value() }}</span>
+    <span class="stat-card__label">{{ label() }}</span>
+  </div>
+  @if (trend() !== null) {
+    <div class="stat-card__trend" [class.stat-card__trend--up]="trend()! > 0" [class.stat-card__trend--down]="trend()! < 0">
+      <mat-icon>{{ trend()! > 0 ? 'trending_up' : trend()! < 0 ? 'trending_down' : 'trending_flat' }}</mat-icon>
+      <span>{{ trend()! > 0 ? '+' : '' }}{{ trend() }}%</span>
+    </div>
+  }
+</div>

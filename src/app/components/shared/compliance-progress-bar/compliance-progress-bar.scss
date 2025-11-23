@@ -1,0 +1,44 @@
+:host {
+  display: block;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+.progress-label {
+  font-family: var(--ct-font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ct-text-primary);
+}
+
+.progress-pct {
+  font-family: var(--ct-font-mono);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.progress-track {
+  width: 100%;
+  background: var(--ct-navy-100);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-pct-inline {
+  font-family: var(--ct-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 4px;
+  display: inline-block;
+}

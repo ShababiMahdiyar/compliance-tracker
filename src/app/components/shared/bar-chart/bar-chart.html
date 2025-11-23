@@ -1,0 +1,20 @@
+@if (title()) {
+  <h3 class="chart-title">{{ title() }}</h3>
+}
+<div class="bar-chart">
+  @for (item of items(); track item.label) {
+    <div class="bar-row">
+      <span class="bar-label" [title]="item.label">{{ item.label }}</span>
+      <div class="bar-track">
+        <div
+          class="bar-fill"
+          [style.width.%]="getWidth(item)"
+          [style.background]="getColor(item)"
+        ></div>
+      </div>
+      <span class="bar-value" [style.color]="getColor(item)">
+        {{ item.value }}{{ unit() }}
+      </span>
+    </div>
+  }
+</div>

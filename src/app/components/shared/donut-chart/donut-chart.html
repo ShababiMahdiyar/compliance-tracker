@@ -1,0 +1,24 @@
+<div class="donut-wrapper">
+  <svg [attr.width]="size()" [attr.height]="size()" viewBox="0 0 180 180" class="donut-svg">
+    @for (path of paths(); track path.label) {
+      <path [attr.d]="path.d" [attr.fill]="path.color" class="donut-segment">
+        <title>{{ path.label }}: {{ path.value }}</title>
+      </path>
+    }
+    @if (centerValue()) {
+      <text x="90" y="84" text-anchor="middle" class="center-value">{{ centerValue() }}</text>
+    }
+    @if (centerLabel()) {
+      <text x="90" y="104" text-anchor="middle" class="center-label">{{ centerLabel() }}</text>
+    }
+  </svg>
+  <div class="donut-legend">
+    @for (seg of segments(); track seg.label) {
+      <div class="legend-item">
+        <span class="legend-dot" [style.background]="seg.color"></span>
+        <span class="legend-text">{{ seg.label }}</span>
+        <span class="legend-value">{{ seg.value }}</span>
+      </div>
+    }
+  </div>
+</div>
