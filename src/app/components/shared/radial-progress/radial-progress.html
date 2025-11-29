@@ -1,0 +1,17 @@
+<div class="radial">
+  <div class="radial__chart-wrap">
+    <svg #chart preserveAspectRatio="xMidYMid meet"></svg>
+    <div #tooltip class="radial__tooltip"></div>
+  </div>
+
+  <!-- Legend -->
+  <div class="radial__legend">
+    @for (ring of rings(); track ring.label) {
+      <div class="radial__legend-item">
+        <span class="radial__legend-dot" [style.background]="ring.color"></span>
+        <span class="radial__legend-label">{{ ring.label }}</span>
+        <span class="radial__legend-value">{{ ring.value }}%</span>
+      </div>
+    }
+  </div>
+</div>
