@@ -1,0 +1,87 @@
+.heatmap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__chart-wrap {
+    position: relative;
+    width: 100%;
+    overflow-x: auto;
+
+    svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      min-width: 400px;
+    }
+  }
+
+  // Tooltip
+  &__tooltip {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 10;
+    padding: 10px 14px;
+    background: var(--ct-navy-900);
+    border: 1px solid rgba(251, 191, 36, 0.15);
+    border-radius: var(--ct-radius-md);
+    box-shadow: var(--ct-shadow-xl);
+    font-family: var(--ct-font-sans);
+    font-size: 12px;
+    color: var(--ct-navy-200);
+    white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: opacity 0.15s ease;
+
+    strong {
+      color: #fff;
+    }
+  }
+
+  // Gradient legend
+  &__legend {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    padding-top: 4px;
+  }
+
+  &__legend-label {
+    font-family: var(--ct-font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--ct-text-muted);
+    letter-spacing: 0.5px;
+  }
+
+  &__legend-bar {
+    width: 140px;
+    height: 8px;
+    border-radius: 4px;
+    background: linear-gradient(
+      90deg,
+      #1e293b 0%,
+      #f59e0b 50%,
+      #10b981 100%
+    );
+  }
+}
+
+// Tooltip inner classes (set via D3 innerHTML)
+:host ::ng-deep {
+  .heatmap-tip__rate {
+    font-family: var(--ct-font-mono);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ct-amber-400);
+  }
+
+  .heatmap-tip__detail {
+    font-size: 11px;
+    color: var(--ct-navy-400);
+  }
+}
