@@ -1,0 +1,168 @@
+<div class="dash">
+  <!-- Hero Header -->
+  <header class="dash__hero">
+    <div class="dash__hero-left">
+      <span class="dash__eyebrow">{{ greeting() }}</span>
+      <h1 class="dash__title">Command Center</h1>
+      <p class="dash__subtitle">Real-time compliance intelligence across your organization</p>
+    </div>
+    <div class="dash__hero-right">
+      <div class="dash__date-chip">
+        <mat-icon>calendar_today</mat-icon>
+        {{ today | date:'EEE, MMM d' }}
+      </div>
+    </div>
+  </header>
+
+  @if (isLoading()) {
+    <div class="dash__loading">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+  } @else {
+    <!-- Stat Cards Row -->
+    <section class="dash__stats">
+      <app-stat-card icon="people" [value]="stats()!.totalEmployees" label="Total Employees" color="#64748b" />
+      <app-stat-card icon="verified" [value]="stats()!.overallComplianceRate + '%'" label="Compliance Rate" [trend]="3" color="#10b981" />
+      <app-stat-card icon="warning_amber" [value]="stats()!.overdueAssignments" label="Overdue" color="#ef4444" />
+      <app-stat-card icon="stars" [value]="stats()!.averageScore + '%'" label="Avg. Score" color="#f59e0b" />
+    </section>
+
+    <!-- Main Analytics Area — Asymmetric 2-column -->
+    <section class="dash__analytics">
+      <!-- LEFT: Donut Hero -->
+      <mat-card class="dash__donut-card">
+        <mat-card-content>
+          <div class="dash__card-header">
+            <h3 class="dash__card-title">
+              <mat-icon>donut_large</mat-icon>
+              Assignment Status
+            </h3>
+            <span class="dash__card-total">
+              {{ stats()!.totalAssignments }} total
+            </span>
+          </div>
+          <app-donut-chart [segments]="donutSegments()" [centerValue]="'' + stats()!.totalAssignments" centerLabel="Total" [size]="200" />
+        </mat-card-content>
+      </mat-card>
+
+      <!-- RIGHT: Stacked bar charts -->
+      <div class="dash__bar-stack">
+        <mat-card class="dash__bar-card">
+          <mat-card-content>
+            <h3 class="dash__card-title">
+              <mat-icon>domain</mat-icon>
+              Department Compliance
+            </h3>
+            <app-bar-chart [items]="deptBarItems()" unit="%" />
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="dash__bar-card">
+          <mat-card-content>
+            <h3 class="dash__card-title">
+              <mat-icon>category</mat-icon>
+              Category Completion
+            </h3>
+            <app-bar-chart [items]="categoryBarItems()" unit="%" />
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </section>
+
+    <!-- Compliance Heatmap — Department × Category -->
+    @if (heatmapData().length > 0) {
+      <section class="dash__heatmap">
+        <mat-card>
+          <mat-card-content>
+            <div class="dash__card-header">
+              <h3 class="dash__card-title">
+                <mat-icon>grid_on</mat-icon>
+                Compliance Heatmap
+              </h3>
+              <span class="dash__card-total">Department × Category</span>
+            </div>
+            <app-compliance-heatmap [cells]="heatmapData()" />
+          </mat-card-content>
+        </mat-card>
+      </section>
+    }
+
+    <!-- Assignment Timeline + Score Distribution — 2 columns -->
+    <section class="dash__deep-analytics">
+      @if (timelineData().length > 0) {
+        <mat-card class="dash__timeline-card">
+          <mat-card-content>
+            <div class="dash__card-header">
+              <h3 class="dash__card-title">
+                <mat-icon>timeline</mat-icon>
+                Assignment Timeline
+              </h3>
+              <span class="dash__card-total">{{ timelineData().length }} assignments</span>
+            </div>
+            <app-assignment-timeline [items]="timelineData()" />
+          </mat-card-content>
+        </mat-card>
+      }
+
+      @if (scoreData().length > 0) {
+        <mat-card class="dash__score-card">
+          <mat-card-content>
+            <div class="dash__card-header">
+              <h3 class="dash__card-title">
+                <mat-icon>insights</mat-icon>
+                Score Distribution
+              </h3>
+              <span class="dash__card-total">{{ scoreData().length }} scores</span>
+            </div>
+            <app-score-distribution [scores]="scoreData()" />
+          </mat-card-content>
+        </mat-card>
+      }
+    </section>
+
+    <!-- Overdue Alert Panel -->
+    @if (overdueAssignments().length > 0) {
+      <section class="dash__overdue">
+        <mat-card class="dash__overdue-card">
+          <mat-card-content>
+            <div class="dash__overdue-header">
+              <div class="dash__overdue-title-area">
+                <div class="dash__overdue-icon">
+                  <mat-icon>notification_important</mat-icon>
+                </div>
+                <div>
+                  <h3 class="dash__card-title">Overdue Assignments</h3>
+                  <p class="dash__overdue-desc">Action required — these assignments have passed their due date</p>
+                </div>
+              </div>
+              <span class="dash__overdue-badge">
+                <span class="dash__pulse"></span>
+                {{ overdueAssignments().length }}
+              </span>
+            </div>
+
+            <div class="dash__table">
+              <div class="dash__table-head">
+                <span>Employee</span>
+                <span>Training</span>
+                <span>Due Date</span>
+                <span>Status</span>
+              </div>
+              @for (item of overdueAssignments(); track item.assignment.id) {
+                <div class="dash__table-row">
+                  <div class="dash__table-employee">
+                    <div class="dash__table-avatar">{{ item.employee?.firstName?.[0] }}{{ item.employee?.lastName?.[0] }}</div>
+                    <span class="dash__table-name">{{ item.employee?.firstName }} {{ item.employee?.lastName }}</span>
+                  </div>
+                  <span class="dash__table-training">{{ item.training?.title }}</span>
+                  <span class="dash__table-date">{{ item.assignment.dueDate | date:'MMM d, y' }}</span>
+                  <app-status-badge [status]="item.assignment.status" />
+                </div>
+              }
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </section>
+    }
+  }
+</div>
