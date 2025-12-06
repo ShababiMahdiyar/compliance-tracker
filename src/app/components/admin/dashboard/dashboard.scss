@@ -1,0 +1,402 @@
+// ─── Admin Dashboard — "Intelligence Command Center" ─────
+// Asymmetric layout, warm navy editorial, Bloomberg-meets-Rams
+
+.dash {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  // ─── Hero Header ────────────────────────────────────
+  &__hero {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 28px 32px 24px;
+    background: var(--ct-navy-900);
+    border-radius: var(--ct-radius-xl);
+    position: relative;
+    overflow: hidden;
+
+    // Diagonal accent line
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 180px;
+      height: 100%;
+      background: linear-gradient(135deg, transparent 40%, color-mix(in srgb, var(--ct-amber-500) 6%, transparent));
+      pointer-events: none;
+    }
+
+    // Subtle grid texture
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 20px 20px;
+      pointer-events: none;
+    }
+  }
+
+  &__hero-left {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__hero-right {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__eyebrow {
+    display: inline-block;
+    font-family: var(--ct-font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ct-amber-400);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  &__title {
+    font-family: var(--ct-font-sans);
+    font-size: 32px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: -0.8px;
+    line-height: 1.1;
+  }
+
+  &__subtitle {
+    font-family: var(--ct-font-sans);
+    font-size: 14px;
+    color: var(--ct-navy-400);
+    margin: 8px 0 0;
+    font-weight: 400;
+  }
+
+  &__date-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--ct-font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ct-navy-300);
+    padding: 6px 14px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--ct-radius-md);
+    backdrop-filter: blur(4px);
+
+    mat-icon {
+      font-size: 14px;
+      width: 14px;
+      height: 14px;
+      color: var(--ct-amber-400);
+    }
+  }
+
+  &__loading {
+    display: flex;
+    justify-content: center;
+    padding: 80px 0;
+  }
+
+  // ─── Stat Cards ─────────────────────────────────────
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  // ─── Analytics — Asymmetric Layout ──────────────────
+  &__analytics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+
+  &__donut-card {
+    mat-card-content {
+      padding: 24px !important;
+    }
+  }
+
+  &__card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  &__card-total {
+    font-family: var(--ct-font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ct-text-muted);
+    padding: 3px 10px;
+    background: var(--ct-navy-50);
+    border-radius: var(--ct-radius-sm);
+  }
+
+  &__bar-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__bar-card {
+    mat-card-content {
+      padding: 20px !important;
+    }
+  }
+
+  &__card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--ct-font-sans);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ct-text-primary);
+    margin: 0 0 16px;
+    letter-spacing: -0.1px;
+
+    mat-icon {
+      font-size: 17px;
+      width: 17px;
+      height: 17px;
+      color: var(--ct-amber-500);
+    }
+  }
+
+  // ─── Deep Analytics — Timeline + Score ─────────────────
+  &__deep-analytics {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+
+  &__timeline-card,
+  &__score-card {
+    mat-card-content {
+      padding: 24px !important;
+    }
+  }
+
+  // ─── Heatmap ──────────────────────────────────────────
+  &__heatmap {
+    mat-card-content {
+      padding: 24px !important;
+    }
+  }
+
+  // ─── Overdue Alert Panel ────────────────────────────
+  &__overdue-card {
+    border-left: 3px solid var(--ct-red-500) !important;
+  }
+
+  &__overdue-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+
+  &__overdue-title-area {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  &__overdue-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--ct-radius-md);
+    background: color-mix(in srgb, var(--ct-red-500) 8%, transparent);
+    flex-shrink: 0;
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      color: var(--ct-red-500);
+    }
+  }
+
+  &__overdue-desc {
+    font-family: var(--ct-font-sans);
+    font-size: 12px;
+    color: var(--ct-text-muted);
+    margin: 4px 0 0;
+    font-weight: 400;
+  }
+
+  &__overdue-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--ct-font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ct-red-500);
+    padding: 6px 14px;
+    background: color-mix(in srgb, var(--ct-red-500) 6%, transparent);
+    border: 1px solid color-mix(in srgb, var(--ct-red-500) 12%, transparent);
+    border-radius: 20px;
+    flex-shrink: 0;
+  }
+
+  &__pulse {
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--ct-red-500);
+    animation: ct-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes ct-pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+    50% { opacity: 0.6; box-shadow: 0 0 0 4px rgba(239, 68, 68, 0); }
+  }
+
+  // ─── Table ──────────────────────────────────────────
+  &__table {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__table-head {
+    display: grid;
+    grid-template-columns: 1.4fr 1.6fr 1fr auto;
+    gap: 12px;
+    padding: 10px 16px;
+    background: var(--ct-navy-50);
+    border-radius: var(--ct-radius-sm);
+    font-family: var(--ct-font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--ct-text-muted);
+  }
+
+  &__table-row {
+    display: grid;
+    grid-template-columns: 1.4fr 1.6fr 1fr auto;
+    gap: 12px;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--ct-border-subtle);
+    align-items: center;
+    font-size: 13px;
+    transition: background 0.12s ease;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background: color-mix(in srgb, var(--ct-red-500) 2%, var(--ct-navy-50));
+    }
+  }
+
+  &__table-employee {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  &__table-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: var(--ct-navy-100);
+    color: var(--ct-navy-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--ct-font-sans);
+    font-size: 10px;
+    font-weight: 700;
+    flex-shrink: 0;
+    letter-spacing: 0.5px;
+  }
+
+  &__table-name {
+    font-weight: 600;
+    color: var(--ct-text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__table-training {
+    color: var(--ct-text-secondary);
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__table-date {
+    font-family: var(--ct-font-mono);
+    font-size: 12px;
+    color: var(--ct-red-500);
+    font-weight: 600;
+  }
+}
+
+// ─── Responsive ────────────────────────────────────────
+@media (max-width: 1024px) {
+  .dash__analytics,
+  .dash__deep-analytics {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dash__hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 24px;
+  }
+
+  .dash__stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dash__table-head,
+  .dash__table-row {
+    grid-template-columns: 1.2fr 1fr;
+
+    // Hide due date + status on mobile
+    span:nth-child(3),
+    span:nth-child(4),
+    app-status-badge {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .dash__stats {
+    grid-template-columns: 1fr;
+  }
+
+  .dash__title {
+    font-size: 26px;
+  }
+}
