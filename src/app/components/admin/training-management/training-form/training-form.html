@@ -1,0 +1,63 @@
+<h2 mat-dialog-title>{{ isEdit ? 'Edit Training' : 'Create Training' }}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" class="training-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" rows="3"></textarea>
+    </mat-form-field>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category">
+          @for (cat of categories; track cat) {
+            <mat-option [value]="cat">{{ cat }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          @for (s of statuses; track s) {
+            <mat-option [value]="s">{{ s }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Duration (minutes)</mat-label>
+        <input matInput type="number" formControlName="durationMinutes" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Passing Score (%)</mat-label>
+        <input matInput type="number" formControlName="passingScore" />
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Expires After (days)</mat-label>
+        <input matInput type="number" formControlName="expiresAfterDays" placeholder="Leave empty for no expiry" />
+      </mat-form-field>
+    </div>
+
+    <mat-checkbox formControlName="isMandatory">Mandatory Training</mat-checkbox>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-flat-button (click)="onSubmit()" [disabled]="form.invalid">
+    {{ isEdit ? 'Update' : 'Create' }}
+  </button>
+</mat-dialog-actions>

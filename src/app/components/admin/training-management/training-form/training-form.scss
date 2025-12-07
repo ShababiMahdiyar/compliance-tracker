@@ -1,0 +1,39 @@
+.training-form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 480px;
+
+  @media (max-width: 600px) {
+    min-width: unset;
+  }
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+
+  mat-form-field {
+    flex: 1;
+  }
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-checkbox {
+  margin-top: 8px;
+}
+
+// Dialog title/actions overrides
+::ng-deep [mat-dialog-title] {
+  font-family: var(--ct-font-sans) !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.2px;
+}
+
+::ng-deep [mat-dialog-actions] {
+  padding: 16px 24px !important;
+}
