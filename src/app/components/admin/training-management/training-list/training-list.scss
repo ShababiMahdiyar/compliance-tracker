@@ -1,0 +1,199 @@
+.training-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  h2 {
+    font-family: var(--ct-font-sans);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ct-text-primary);
+    margin: 0;
+    letter-spacing: -0.3px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: var(--ct-text-muted);
+    margin: 4px 0 0;
+  }
+}
+
+.search-field {
+  width: 100%;
+  max-width: 400px;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  padding: 80px 0;
+}
+
+.trainings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+}
+
+.training-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s var(--ct-ease), box-shadow 0.25s var(--ct-ease);
+
+  // Category-colored top border accent
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--card-accent, var(--ct-navy-300));
+    transition: height 0.2s var(--ct-ease);
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--ct-shadow-lg) !important;
+
+    &::before {
+      height: 4px;
+    }
+  }
+
+  mat-card-content {
+    padding: 20px !important;
+  }
+}
+
+.category-chip {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: var(--ct-radius-sm);
+  font-family: var(--ct-font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: 0.3px;
+  background: color-mix(in srgb, currentColor 8%, transparent);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0;
+
+  button {
+    width: 32px;
+    height: 32px;
+    color: var(--ct-text-muted);
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: var(--ct-text-primary);
+    }
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.card-title {
+  font-family: var(--ct-font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ct-text-primary);
+  margin: 0 0 8px;
+}
+
+.card-description {
+  font-size: 13px;
+  color: var(--ct-text-secondary);
+  line-height: 1.6;
+  margin: 0 0 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--ct-font-sans);
+  font-size: 12px;
+  color: var(--ct-text-muted);
+
+  mat-icon {
+    font-size: 15px;
+    width: 15px;
+    height: 15px;
+  }
+
+  &.mandatory {
+    color: var(--ct-red-500);
+    font-weight: 600;
+  }
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--ct-text-muted);
+
+  mat-icon {
+    font-size: 56px;
+    width: 56px;
+    height: 56px;
+    color: var(--ct-navy-200);
+    background: var(--ct-navy-50);
+    padding: 20px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: content-box;
+    margin-bottom: 4px;
+  }
+
+  p {
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+
+@media (max-width: 600px) {
+  .page-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .trainings-grid {
+    grid-template-columns: 1fr;
+  }
+}

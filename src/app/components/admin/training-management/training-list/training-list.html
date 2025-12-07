@@ -1,0 +1,81 @@
+<div class="training-list">
+  <div class="page-header">
+    <div>
+      <h2>Training Programs</h2>
+      <p class="subtitle">Manage training programs and assign them to employees</p>
+    </div>
+    <button mat-flat-button (click)="openCreateDialog()">
+      <mat-icon>add</mat-icon>
+      New Training
+    </button>
+  </div>
+
+  <!-- Search -->
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Search trainings</mat-label>
+    <input matInput (input)="onSearch($event)" placeholder="Search by title or category..." />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  @if (loading()) {
+    <div class="loading-container">
+      <mat-spinner diameter="48"></mat-spinner>
+    </div>
+  } @else {
+    <div class="trainings-grid">
+      @for (training of filteredTrainings(); track training.id) {
+        <mat-card class="training-card" [style.--card-accent]="getCategoryColor(training.category)">
+          <mat-card-content>
+            <div class="card-top">
+              <span class="category-chip" [style.color]="getCategoryColor(training.category)">
+                {{ training.category }}
+              </span>
+              <div class="card-actions">
+                <button mat-icon-button matTooltip="Assign" (click)="openAssignDialog(training)">
+                  <mat-icon>person_add</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Edit" (click)="openEditDialog(training)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Delete" (click)="deleteTraining(training)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+
+            <h3 class="card-title">{{ training.title }}</h3>
+            <p class="card-description">{{ training.description }}</p>
+
+            <div class="card-meta">
+              <div class="meta-item">
+                <mat-icon>schedule</mat-icon>
+                <span>{{ training.durationMinutes }} min</span>
+              </div>
+              <div class="meta-item">
+                <mat-icon>grade</mat-icon>
+                <span>{{ training.passingScore }}% to pass</span>
+              </div>
+              @if (training.isMandatory) {
+                <div class="meta-item mandatory">
+                  <mat-icon>priority_high</mat-icon>
+                  <span>Mandatory</span>
+                </div>
+              }
+              @if (training.expiresAfterDays) {
+                <div class="meta-item">
+                  <mat-icon>event</mat-icon>
+                  <span>Expires in {{ training.expiresAfterDays }}d</span>
+                </div>
+              }
+            </div>
+          </mat-card-content>
+        </mat-card>
+      } @empty {
+        <div class="empty-state">
+          <mat-icon>school</mat-icon>
+          <p>No trainings found</p>
+        </div>
+      }
+    </div>
+  }
+</div>
