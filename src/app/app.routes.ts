@@ -21,6 +21,20 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./components/admin/dashboard/dashboard').then((m) => m.AdminDashboard),
       },
+      {
+        path: 'trainings',
+        loadComponent: () =>
+          import('./components/admin/training-management/training-list/training-list').then(
+            (m) => m.TrainingList
+          ),
+      },
+      {
+        path: 'employees',
+        loadComponent: () =>
+          import(
+            './components/admin/employee-compliance/employee-compliance-table/employee-compliance-table'
+          ).then((m) => m.EmployeeComplianceTable),
+      },
     ],
   },
   {

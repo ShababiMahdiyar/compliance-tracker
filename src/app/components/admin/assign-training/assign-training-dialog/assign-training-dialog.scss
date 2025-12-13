@@ -1,0 +1,32 @@
+.training-name {
+  font-family: var(--ct-font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ct-amber-500);
+  margin: 0 0 16px;
+}
+
+.assign-form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 400px;
+
+  @media (max-width: 600px) {
+    min-width: unset;
+  }
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+::ng-deep [mat-dialog-title] {
+  font-family: var(--ct-font-sans) !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+}
+
+::ng-deep [mat-dialog-actions] {
+  padding: 16px 24px !important;
+}

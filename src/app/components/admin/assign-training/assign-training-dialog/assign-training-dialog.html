@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>Assign Training</h2>
+
+<mat-dialog-content>
+  <p class="training-name">{{ training.title }}</p>
+
+  <form [formGroup]="form" class="assign-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Select Employees</mat-label>
+      <mat-select formControlName="employeeIds" multiple>
+        @for (emp of employees; track emp.id) {
+          <mat-option [value]="emp.id">
+            {{ emp.firstName }} {{ emp.lastName }} — {{ emp.department }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Due Date</mat-label>
+      <input matInput type="date" formControlName="dueDate" />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-flat-button (click)="onSubmit()" [disabled]="form.invalid || submitting()">
+    {{ submitting() ? 'Assigning...' : 'Assign' }}
+  </button>
+</mat-dialog-actions>
