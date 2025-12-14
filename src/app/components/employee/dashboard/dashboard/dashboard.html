@@ -1,0 +1,109 @@
+<div class="dashboard">
+  <!-- Hero Greeting -->
+  <div class="dashboard__hero">
+    <div class="dashboard__hero-content">
+      <p class="dashboard__greeting">{{ greeting() }}</p>
+      <h2 class="dashboard__title">Welcome back, {{ user()?.firstName }}!</h2>
+      <p class="dashboard__subtitle">Here's your training compliance overview</p>
+    </div>
+    <div class="dashboard__compliance-ring">
+      <span class="dashboard__compliance-value">{{ complianceRate() }}%</span>
+      <span class="dashboard__compliance-label">Compliant</span>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <app-stat-card
+      icon="assignment"
+      [value]="totalAssigned()"
+      label="Total Assigned"
+      color="#64748b"
+    />
+    <app-stat-card
+      icon="check_circle"
+      [value]="completedCount()"
+      label="Completed"
+      color="#10b981"
+    />
+    <app-stat-card
+      icon="pending"
+      [value]="inProgressCount()"
+      label="In Progress"
+      color="#f59e0b"
+    />
+    <app-stat-card
+      icon="warning"
+      [value]="overdueCount()"
+      label="Overdue"
+      color="#ef4444"
+    />
+  </div>
+
+  <div class="compliance-row">
+    <mat-card class="compliance-card">
+      <h3>
+        <mat-icon>verified</mat-icon>
+        Your Compliance Rate
+      </h3>
+      <app-compliance-progress-bar [value]="complianceRate()" [height]="14" />
+    </mat-card>
+
+    @if (categoryRings().length > 0) {
+      <mat-card class="radial-card">
+        <h3>
+          <mat-icon>radar</mat-icon>
+          Category Breakdown
+        </h3>
+        <app-radial-progress [rings]="categoryRings()" [size]="220" />
+      </mat-card>
+    }
+  </div>
+
+  <mat-card class="deadlines-card">
+    <h3>
+      <mat-icon>schedule</mat-icon>
+      Upcoming Deadlines
+    </h3>
+
+    @if (upcomingAssignments().length === 0) {
+      <p class="empty-message">No upcoming deadlines. You're all caught up!</p>
+    } @else {
+      <mat-table [dataSource]="upcomingAssignments()">
+        <ng-container matColumnDef="training">
+          <mat-header-cell *matHeaderCellDef>Training</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.trainingTitle }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <app-status-badge [status]="row.assignment.status" />
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dueDate">
+          <mat-header-cell *matHeaderCellDef>Due Date</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{
+            row.assignment.dueDate | date
+          }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <button
+              mat-flat-button
+              color="primary"
+              (click)="goToTraining(row.assignment.id)"
+            >
+              {{ getActionLabel(row.assignment.status) }}
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns" />
+        <mat-row *matRowDef="let row; columns: displayedColumns" />
+      </mat-table>
+    }
+  </mat-card>
+</div>
