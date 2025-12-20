@@ -51,6 +51,18 @@ export const routes: Routes = [
             (m) => m.EmployeeDashboard
           ),
       },
+      {
+        path: 'trainings',
+        loadComponent: () =>
+          import('./components/employee/my-trainings/my-trainings').then((m) => m.MyTrainings),
+      },
+      {
+        path: 'trainings/:id',
+        loadComponent: () =>
+          import('./components/employee/training-detail/training-detail').then(
+            (m) => m.TrainingDetail
+          ),
+      },
     ],
   },
   { path: '', redirectTo: 'authentication', pathMatch: 'full' },
