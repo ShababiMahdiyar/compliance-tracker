@@ -1,0 +1,113 @@
+<div class="training-detail">
+  @if (assignment() && training()) {
+    <button mat-icon-button class="back-button" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+
+    <mat-card class="detail-card">
+      <div class="detail-header">
+        <div>
+          <span class="category-badge">{{ training()!.category }}</span>
+          <h2>{{ training()!.title }}</h2>
+          <app-status-badge [status]="assignment()!.status" />
+        </div>
+      </div>
+
+      <mat-divider />
+
+      <div class="detail-info">
+        <div class="info-grid">
+          <div class="info-item">
+            <mat-icon>schedule</mat-icon>
+            <div>
+              <span class="info-label">Duration</span>
+              <span class="info-value"
+                >{{ training()!.durationMinutes }} min</span
+              >
+            </div>
+          </div>
+          <div class="info-item">
+            <mat-icon>verified</mat-icon>
+            <div>
+              <span class="info-label">Passing Score</span>
+              <span class="info-value">{{ training()!.passingScore }}%</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <mat-icon>event</mat-icon>
+            <div>
+              <span class="info-label">Due Date</span>
+              <span class="info-value">{{
+                assignment()!.dueDate | date
+              }}</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <mat-icon>priority_high</mat-icon>
+            <div>
+              <span class="info-label">Mandatory</span>
+              <span class="info-value">{{
+                training()!.isMandatory ? "Yes" : "No"
+              }}</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <mat-icon>replay</mat-icon>
+            <div>
+              <span class="info-label">Attempts</span>
+              <span class="info-value">{{ assignment()!.attempts }}</span>
+            </div>
+          </div>
+          @if (assignment()!.score !== null) {
+            <div class="info-item">
+              <mat-icon>grade</mat-icon>
+              <div>
+                <span class="info-label">Score</span>
+                <span class="info-value">{{ assignment()!.score }}%</span>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <p class="description">{{ training()!.description }}</p>
+
+      @switch (assignment()!.status) {
+        @case ("not-started") {
+          <div class="action-section">
+            <button
+              mat-flat-button
+              color="primary"
+              (click)="startTraining()"
+            >
+              <mat-icon>play_arrow</mat-icon>
+              Start Training
+            </button>
+          </div>
+        }
+        @case ("in-progress") {
+          <div class="action-section">
+            <button
+              mat-flat-button
+              color="primary"
+              (click)="openCompleteDialog()"
+            >
+              <mat-icon>check</mat-icon>
+              Mark Complete
+            </button>
+          </div>
+        }
+        @case ("completed") {
+          <div class="completion-banner">
+            <mat-icon>check_circle</mat-icon>
+            Training completed with score {{ assignment()!.score }}%
+          </div>
+        }
+      }
+    </mat-card>
+  } @else {
+    <div class="loading">
+      <mat-spinner diameter="48" />
+    </div>
+  }
+</div>

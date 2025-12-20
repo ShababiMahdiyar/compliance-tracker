@@ -1,0 +1,44 @@
+<div class="my-trainings">
+  <h2>My Trainings</h2>
+
+  <mat-tab-group (selectedTabChange)="onTabChange($event)">
+    <mat-tab label="All" />
+    <mat-tab label="Not Started" />
+    <mat-tab label="In Progress" />
+    <mat-tab label="Completed" />
+    <mat-tab label="Overdue" />
+  </mat-tab-group>
+
+  <div class="trainings-grid">
+    @for (item of filteredAssignments(); track item.assignment.id) {
+      <mat-card class="training-card" (click)="goToDetail(item.assignment.id)">
+        <div class="card-header">
+          <span class="category-tag" [attr.data-category]="item.training.category">{{ item.training.category }}</span>
+          <app-status-badge [status]="item.assignment.status" />
+        </div>
+        <h3>{{ item.training.title }}</h3>
+        <p class="description">
+          {{ item.training.description | slice: 0 : 100 }}...
+        </p>
+        <div class="card-meta">
+          <span>
+            <mat-icon>schedule</mat-icon>
+            {{ item.training.durationMinutes }}min
+          </span>
+          <span>
+            <mat-icon>event</mat-icon>
+            Due: {{ item.assignment.dueDate | date }}
+          </span>
+          @if (item.assignment.score !== null) {
+            <span>
+              <mat-icon>grade</mat-icon>
+              Score: {{ item.assignment.score }}%
+            </span>
+          }
+        </div>
+      </mat-card>
+    } @empty {
+      <p class="empty-message">No trainings found for this filter.</p>
+    }
+  </div>
+</div>

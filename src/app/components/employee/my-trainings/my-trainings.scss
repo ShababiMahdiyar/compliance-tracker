@@ -1,0 +1,114 @@
+.my-trainings {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  h2 {
+    font-family: var(--ct-font-sans);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ct-text-primary);
+    margin: 0;
+    letter-spacing: -0.5px;
+  }
+}
+
+mat-tab-group {
+  margin-bottom: 4px;
+
+  ::ng-deep .mat-mdc-tab {
+    font-family: var(--ct-font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+}
+
+.trainings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.training-card {
+  padding: 20px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s var(--ct-ease), box-shadow 0.25s var(--ct-ease);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--ct-shadow-lg) !important;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .category-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: var(--ct-radius-sm);
+    font-family: var(--ct-font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: capitalize;
+    letter-spacing: 0.3px;
+    color: var(--ct-navy-600);
+    background: var(--ct-navy-100);
+
+    // Category-specific colors
+    &[data-category="compliance"] { color: var(--ct-amber-500); background: color-mix(in srgb, var(--ct-amber-500) 10%, transparent); }
+    &[data-category="safety"] { color: var(--ct-orange-500); background: color-mix(in srgb, var(--ct-orange-500) 10%, transparent); }
+    &[data-category="technical"] { color: var(--ct-emerald-500); background: color-mix(in srgb, var(--ct-emerald-500) 10%, transparent); }
+    &[data-category="soft-skills"] { color: var(--ct-violet-500); background: color-mix(in srgb, var(--ct-violet-500) 10%, transparent); }
+    &[data-category="certification"] { color: var(--ct-teal-500); background: color-mix(in srgb, var(--ct-teal-500) 10%, transparent); }
+  }
+
+  h3 {
+    font-family: var(--ct-font-sans);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ct-text-primary);
+    margin: 0 0 8px;
+  }
+
+  .description {
+    font-size: 13px;
+    color: var(--ct-text-secondary);
+    line-height: 1.5;
+    margin: 0 0 16px;
+  }
+
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    font-size: 12px;
+    color: var(--ct-text-muted);
+
+    span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+
+      mat-icon {
+        font-size: 15px;
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
+}
+
+.empty-message {
+  grid-column: 1 / -1;
+  color: var(--ct-text-muted);
+  font-size: 13px;
+  padding: 24px 0;
+  text-align: center;
+}
