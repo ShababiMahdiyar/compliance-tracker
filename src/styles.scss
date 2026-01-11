@@ -104,3 +104,193 @@ a {
     background: var(--ct-navy-400);
   }
 }
+
+// Global Material overrides
+mat-card {
+  border-radius: var(--ct-radius-lg) !important;
+  box-shadow: var(--ct-shadow-md) !important;
+  border: 1px solid var(--ct-border-subtle);
+}
+
+.mat-mdc-snack-bar-container {
+  border-radius: var(--ct-radius-md) !important;
+  font-family: var(--ct-font-sans) !important;
+}
+
+.mat-mdc-dialog-container {
+  border-radius: var(--ct-radius-xl) !important;
+}
+
+// ─── Focus Ring ────────────────────────────────────
+*:focus-visible {
+  outline: 2px solid var(--ct-amber-400);
+  outline-offset: 2px;
+  border-radius: var(--ct-radius-sm);
+}
+
+// ─── Material Form Field Overrides ─────────────────
+.mat-mdc-form-field {
+  --mdc-outlined-text-field-container-shape: var(--ct-radius-md) !important;
+  font-family: var(--ct-font-sans) !important;
+
+  .mdc-text-field--outlined {
+    border-radius: var(--ct-radius-md) !important;
+    background: color-mix(in srgb, var(--ct-navy-100) 40%, transparent) !important;
+    transition: background 0.2s var(--ct-ease) !important;
+
+    // Default border — softer, modern
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__notch,
+    .mdc-notched-outline__trailing {
+      border-color: var(--ct-border) !important;
+      transition: border-color 0.2s var(--ct-ease) !important;
+    }
+
+    // Hover — subtle lift
+    &:hover:not(.mdc-text-field--focused):not(.mdc-text-field--disabled) {
+      background: color-mix(in srgb, var(--ct-navy-100) 65%, transparent) !important;
+
+      .mdc-notched-outline__leading,
+      .mdc-notched-outline__notch,
+      .mdc-notched-outline__trailing {
+        border-color: var(--ct-navy-300) !important;
+      }
+    }
+  }
+
+  // Focused state — amber accent with glow
+  .mdc-text-field--focused {
+    background: var(--ct-surface) !important;
+
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__notch,
+    .mdc-notched-outline__trailing {
+      border-color: var(--ct-amber-400) !important;
+      border-width: 2px !important;
+    }
+  }
+
+  .mat-mdc-form-field-focus-overlay {
+    background: color-mix(in srgb, var(--ct-amber-400) 3%, transparent) !important;
+  }
+
+  // Labels
+  .mdc-floating-label {
+    font-family: var(--ct-font-sans) !important;
+    font-weight: 500 !important;
+    color: var(--ct-text-muted) !important;
+  }
+
+  .mdc-floating-label--float-above {
+    color: var(--ct-amber-500) !important;
+    font-weight: 600 !important;
+  }
+
+  // Input text
+  input.mat-mdc-input-element,
+  textarea.mat-mdc-input-element {
+    font-family: var(--ct-font-sans) !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: var(--ct-text-primary) !important;
+    caret-color: var(--ct-amber-500);
+
+    &::placeholder {
+      color: var(--ct-navy-400) !important;
+      font-weight: 400 !important;
+    }
+  }
+
+  // Suffix icons
+  .mat-mdc-form-field-icon-suffix {
+    color: var(--ct-navy-400) !important;
+
+    mat-icon {
+      font-size: 20px !important;
+      width: 20px !important;
+      height: 20px !important;
+    }
+  }
+
+  // Hint & error text
+  .mat-mdc-form-field-hint {
+    font-size: 12px !important;
+    color: var(--ct-text-muted) !important;
+  }
+
+  .mat-mdc-form-field-error {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: var(--ct-red-500) !important;
+  }
+
+  // Disabled state
+  .mdc-text-field--disabled {
+    opacity: 0.55;
+    background: var(--ct-navy-50) !important;
+  }
+}
+
+// Select dropdown panel
+.mat-mdc-select-panel {
+  border-radius: var(--ct-radius-md) !important;
+  border: 1px solid var(--ct-border) !important;
+  box-shadow: var(--ct-shadow-lg) !important;
+  background: var(--ct-surface) !important;
+
+  .mat-mdc-option {
+    font-family: var(--ct-font-sans) !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    min-height: 44px !important;
+    transition: background 0.12s var(--ct-ease) !important;
+
+    &:hover {
+      background: color-mix(in srgb, var(--ct-amber-400) 6%, transparent) !important;
+    }
+
+    &.mdc-list-item--selected {
+      background: color-mix(in srgb, var(--ct-amber-400) 10%, transparent) !important;
+      color: var(--ct-navy-900) !important;
+      font-weight: 600 !important;
+    }
+  }
+}
+
+// ─── Button Polish ─────────────────────────────────
+.mat-mdc-unelevated-button,
+button[mat-flat-button] {
+  font-family: var(--ct-font-sans) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+  border-radius: var(--ct-radius-md) !important;
+  transition: transform 0.15s var(--ct-ease), box-shadow 0.15s var(--ct-ease) !important;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--ct-shadow-md) !important;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+button[mat-icon-button] {
+  transition: background 0.15s var(--ct-ease), color 0.15s var(--ct-ease) !important;
+}
+
+// ─── Chip Polish ───────────────────────────────────
+.mat-mdc-chip {
+  font-family: var(--ct-font-sans) !important;
+  font-weight: 600 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.3px !important;
+  border-radius: var(--ct-radius-sm) !important;
+}
+
+// ─── Card Hover Lift ───────────────────────────────
+mat-card {
+  transition: transform 0.2s var(--ct-ease), box-shadow 0.2s var(--ct-ease) !important;
+}
+
