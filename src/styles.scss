@@ -1,1 +1,106 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+// ─── Design Tokens ────────────────────────────────────
+:root {
+  // Brand palette — deep navy + warm amber accent
+  --ct-navy-950: #0a0f1e;
+  --ct-navy-900: #0f172a;
+  --ct-navy-800: #1e293b;
+  --ct-navy-700: #334155;
+  --ct-navy-600: #475569;
+  --ct-navy-500: #64748b;
+  --ct-navy-400: #94a3b8;
+  --ct-navy-300: #cbd5e1;
+  --ct-navy-200: #e2e8f0;
+  --ct-navy-100: #f1f5f9;
+  --ct-navy-50: #f8fafc;
+
+  --ct-amber-500: #f59e0b;
+  --ct-amber-400: #fbbf24;
+  --ct-amber-300: #fcd34d;
+
+  --ct-emerald-500: #10b981;
+  --ct-emerald-400: #34d399;
+  --ct-emerald-600: #059669;
+
+  --ct-red-500: #ef4444;
+  --ct-red-400: #f87171;
+  --ct-red-100: #fee2e2;
+
+  --ct-surface: #ffffff;
+  --ct-surface-raised: #ffffff;
+  --ct-background: #f8fafc;
+  --ct-text-primary: #0f172a;
+  --ct-text-secondary: #475569;
+  --ct-text-muted: #94a3b8;
+  --ct-border: #e2e8f0;
+  --ct-border-subtle: #f1f5f9;
+
+  // Typography
+  --ct-font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --ct-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  // Spacing
+  --ct-radius-sm: 6px;
+  --ct-radius-md: 10px;
+  --ct-radius-lg: 16px;
+  --ct-radius-xl: 24px;
+
+  // Additional palette
+  --ct-violet-500: #7c3aed;
+  --ct-violet-100: #ede9fe;
+  --ct-teal-500: #14b8a6;
+  --ct-orange-500: #f97316;
+
+  // Shadows
+  --ct-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --ct-shadow-md: 0 4px 12px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04);
+  --ct-shadow-lg: 0 12px 40px rgba(15, 23, 42, 0.08), 0 4px 12px rgba(15, 23, 42, 0.04);
+  --ct-shadow-xl: 0 20px 60px rgba(15, 23, 42, 0.1), 0 8px 20px rgba(15, 23, 42, 0.06);
+
+  // Transitions
+  --ct-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --ct-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--ct-font-sans);
+  background: var(--ct-background);
+  color: var(--ct-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  // Subtle dot-grid page texture
+  background-image: radial-gradient(circle, var(--ct-navy-200) 0.5px, transparent 0.5px);
+  background-size: 24px 24px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ct-navy-300);
+  border-radius: 3px;
+
+  &:hover {
+    background: var(--ct-navy-400);
+  }
+}
