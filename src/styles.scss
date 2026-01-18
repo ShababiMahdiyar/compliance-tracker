@@ -294,3 +294,43 @@ mat-card {
   transition: transform 0.2s var(--ct-ease), box-shadow 0.2s var(--ct-ease) !important;
 }
 
+// ─── Section Headers ───────────────────────────────
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--ct-font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ct-text-primary);
+  margin: 0 0 16px;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: var(--ct-amber-500);
+  }
+}
+
+// ─── Page Title Pattern ────────────────────────────
+.page-title {
+  font-family: var(--ct-font-sans);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--ct-text-primary);
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+
+.page-subtitle {
+  font-family: var(--ct-font-sans);
+  font-size: 14px;
+  color: var(--ct-text-muted);
+  margin: 4px 0 0;
+}
+
+// ─── Selection Color ───────────────────────────────
+::selection {
+  background: color-mix(in srgb, var(--ct-amber-400) 25%, transparent);
+}
