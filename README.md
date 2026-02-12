@@ -20,6 +20,24 @@ An Angular application for managing employee training compliance. Features role-
 - Route guards for authorization
 - Visual components: charts (bar, donut, radial), heatmap, stat cards, status badges
 
+## Screenshots
+
+### Authentication
+
+![Login](docs/screenshots/login.png)
+
+### Admin
+
+![Admin Dashboard](docs/screenshots/admin-dashboard.png)
+![Training Programs](docs/screenshots/admin-training-programs.png)
+![Edit Training](docs/screenshots/admin-edit-training.png)
+![Employee Compliance](docs/screenshots/admin-employee-compliance.png)
+
+### Employee
+
+![Employee Dashboard](docs/screenshots/employee-dashboard.png)
+![My Trainings](docs/screenshots/employee-my-trainings.png)
+
 ## Tech Stack
 
 - Angular 20 with standalone components and lazy-loaded routes
