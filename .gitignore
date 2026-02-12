@@ -13,20 +13,14 @@ yarn-error.log
 
 # IDEs and editors
 .idea/
+.vscode/
+.history/
 .project
 .classpath
 .c9/
 *.launch
 .settings/
 *.sublime-workspace
-
-# Visual Studio Code
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.history/*
 
 # Miscellaneous
 /.angular/cache
@@ -36,6 +30,9 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
+
+# Claude Code
+.claude/
 
 # System files
 .DS_Store
