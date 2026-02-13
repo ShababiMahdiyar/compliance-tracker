@@ -55,6 +55,30 @@ ng serve
 
 Navigate to `http://localhost:4200/`. The app redirects to the login page where you can sign in as an admin or employee.
 
+## Docker
+
+```bash
+# Production build served by nginx
+npm run docker:prod
+
+# Development with hot reload
+npm run docker:dev
+```
+
+The production image uses a multi-stage build (Node → nginx) and serves the app at `http://localhost:8080`.
+
+## CI/CD
+
+GitHub Actions workflows run automatically:
+
+| Workflow | Trigger | What it does |
+|---|---|---|
+| **CI** | PRs + pushes to `main` | Runs tests and builds |
+| **Deploy** | Push to `main` | Deploys to GitHub Pages |
+| **Docker** | Push to `main` | Pushes image to GHCR |
+
+Live site: https://ShababiMahdiyar.github.io/compliance-tracker/
+
 ## Build
 
 ```bash
