@@ -1,18 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { EmployeeDashboard } from './dashboard';
 
-import { Dashboard } from './dashboard';
-
-describe('Dashboard', () => {
-  let component: Dashboard;
-  let fixture: ComponentFixture<Dashboard>;
+describe('EmployeeDashboard', () => {
+  let component: EmployeeDashboard;
+  let fixture: ComponentFixture<EmployeeDashboard>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Dashboard]
-    })
-    .compileComponents();
+      imports: [EmployeeDashboard],
+      providers: [provideZonelessChangeDetection(), provideRouter([])],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(Dashboard);
+    fixture = TestBed.createComponent(EmployeeDashboard);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
