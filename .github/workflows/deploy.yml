@@ -1,0 +1,55 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # ── Critical: base-href ────────────────────────────
+      # GitHub Pages serves from https://<user>.github.io/<repo>/
+      # Without --base-href, Angular looks for assets at the root (/)
+      # instead of /compliance-tracker/, breaking all JS/CSS loads.
+      - name: Build for GitHub Pages
+        run: npx ng build --configuration=production --base-href /compliance-tracker/
+
+      # ── SPA routing workaround ─────────────────────────
+      # GitHub Pages returns its own 404 page for unknown routes.
+      # By copying index.html to 404.html, GitHub serves YOUR index.html
+      # on 404, letting Angular's router handle the path.
+      - name: Copy index.html to 404.html
+        run: cp dist/compliance-tracker/browser/index.html dist/compliance-tracker/browser/404.html
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/compliance-tracker/browser/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
